@@ -82,7 +82,7 @@ class LaTexTState extends State<LaTexT> {
             child: DefaultTextStyle.merge(
                 child: Wrap(
               direction: Axis.horizontal,
-              runSpacing: 5,
+              runSpacing: 6,
               spacing: 4,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: Math.tex(
