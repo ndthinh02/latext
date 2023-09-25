@@ -1,4 +1,5 @@
 library latext;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 
@@ -40,11 +41,6 @@ class LaTexTState extends State<LaTexT> {
     List<RegExpMatch> matches =
         RegExp(rawRegExp, dotAll: true).allMatches(laTeXCode).toList();
 
-    final longEq = Math.tex(r'');
-    final breakResult = longEq.texBreak();
-    final widgets = Wrap(
-      children: breakResult.parts,
-    );
     // If no single Math part found, returning the raw [Text] from widget.laTeXCode
     if (matches.isEmpty) return widget.laTeXCode;
 
@@ -66,7 +62,11 @@ class LaTexTState extends State<LaTexT> {
         textBlocks.add(
           WidgetSpan(
             alignment: PlaceholderAlignment.middle,
-            child:  Wrap(
+            child: Wrap(
+              direction: Axis.horizontal,
+              runSpacing: 6,
+              spacing: 4,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: Math.tex(
                 laTeXMatch.group(3)?.trim() ?? '',
                 textStyle: defaultTextStyle,
@@ -81,6 +81,10 @@ class LaTexTState extends State<LaTexT> {
             alignment: PlaceholderAlignment.middle,
             child: DefaultTextStyle.merge(
                 child: Wrap(
+              direction: Axis.horizontal,
+              runSpacing: 5,
+              spacing: 4,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: Math.tex(
                 laTeXMatch.group(6)?.trim() ?? '',
                 textStyle: defaultTextStyle,
