@@ -34,12 +34,12 @@ class LaTexTState extends State<LaTexT> {
     // Building [RegExp] to find any Math part of the LaTeX code by looking for the specified delimiters
     final String delimiter = widget.delimiter.replaceAll(r'$', r'\$');
     final String displayDelimiter =
-        widget.displayDelimiter.replaceAll(r'$', r'\$');
+    widget.displayDelimiter.replaceAll(r'$', r'\$');
 
     final String rawRegExp =
         '(($delimiter)([^$delimiter]*[^\\\\\\$delimiter])($delimiter)|($displayDelimiter)([^$displayDelimiter]*[^\\\\\\$displayDelimiter])($displayDelimiter))';
     List<RegExpMatch> matches =
-        RegExp(rawRegExp, dotAll: true).allMatches(laTeXCode).toList();
+    RegExp(rawRegExp, dotAll: true).allMatches(laTeXCode).toList();
 
     // If no single Math part found, returning the raw [Text] from widget.laTeXCode
     if (matches.isEmpty) return widget.laTeXCode;
@@ -81,15 +81,15 @@ class LaTexTState extends State<LaTexT> {
             alignment: PlaceholderAlignment.middle,
             child: DefaultTextStyle.merge(
                 child: Wrap(
-              direction: Axis.horizontal,
-              runSpacing: 6,
-              spacing: 4,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: Math.tex(
-                laTeXMatch.group(6)?.trim() ?? '',
-                textStyle: defaultTextStyle,
-              ).texBreak().parts,
-            )),
+                  direction: Axis.horizontal,
+                  runSpacing: 6,
+                  spacing: 4,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: Math.tex(
+                    laTeXMatch.group(6)?.trim() ?? '',
+                    textStyle: defaultTextStyle,
+                  ).texBreak().parts,
+                )),
           ),
           const TextSpan(text: '\n')
         ]);
